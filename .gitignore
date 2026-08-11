@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Raw source images — large, and regenerated into public/images by
+# scripts/optimise-images.js. Keep them locally; do not commit 69 MB to git.
+/images

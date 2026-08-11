@@ -1,26 +1,173 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/**
+ * Shree Vinayak Gas.
+ *
+ * A warm charcoal ground carrying the brand red, with each gas keeping its own
+ * identity colour as a wayfinding rail. The red is the business's own — taken
+ * from the existing logo — and it does all the work an accent should: the mark,
+ * anything actionable, and nothing else.
+ *
+ * Deliberately a single committed dark look, not a themed pair. The colour rails
+ * only read as a system against a dark ground.
+ */
+@theme {
+  /* ── Ground ─────────────────────────────────────────────────────────────
+     True graphite: a cool, faintly blue-grey dark that reads as machined
+     metal. The red does the warming, so the ground does not need to.        */
+  --color-pit: #08090a;
+  --color-graphite: #0e1012;
+  --color-shell: #15181a;
+  --color-riser: #1d2124;
+  --color-seam: #2a2f33;
+  --color-seam-bright: #3e4549;
+
+  /* ── Type on the ground ─────────────────────────────────────────────────
+     Every step sits at or above 7:1 on the graphite ground except `faint`,
+     which is reserved for non-essential meta and never used for reading.   */
+  --color-bright: #f4f6f7;
+  --color-plain: #d5dadd;
+  --color-dim: #a8b0b5;
+  --color-faint: #798287;
+
+  /* ── Brand ──────────────────────────────────────────────────────────────
+     `brand` fills; `brand-bright` is the only one used for red text on the
+     dark ground, where the solid red does not clear the contrast bar.      */
+  --color-brand: #ed2b24;
+  --color-brand-bright: #ff6b62;
+  --color-brand-deep: #c21c16;
+  --color-brand-ink: #ffffff;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-ink: #08301a;
+
+  /* ── Type ───────────────────────────────────────────────────────────────
+     Tinos is the logo face — a Times-metric serif matching the existing
+     mark — and it carries the headings too, so the brand voice runs through
+     the whole page rather than stopping at the logo.                       */
+  --font-display: var(--font-tinos), Times, "Times New Roman", serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    background: var(--color-graphite);
+    color-scheme: dark;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-graphite);
+    color: var(--color-plain);
+    font-family: var(--font-sans);
+    /* 17px base. Long specification copy read on a phone in a workshop needs
+       the extra pixel more than the layout needs the saved line. */
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Sentence case, not uppercase — an all-caps condensed heading is the least
+     readable thing on a page, and these headings carry real information. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+    color: var(--color-bright);
+  }
+
+  h3 {
+    line-height: 1.25;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-bright);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-brand-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /**
+   * The register row — the site's primary structure.
+   *
+   * A numbered list with a colour rail down the left, rather than a grid of
+   * cards. It reads like a stock manifest, which is the document this business
+   * actually lives in, and it scales to a long list without becoming
+   * wallpaper.
+   */
+  .rail {
+    position: relative;
+    padding-left: 1.75rem;
+  }
+
+  .rail::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--rail-color, var(--color-seam));
+  }
+
+  /* Small structural caption. Sentence case in the body face — the uppercase
+     letterspaced eyebrow is deliberately not part of this system. */
+  .caption {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-dim);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* Index numerals: 01 … 12. Tabular so the column stays true. */
+  .index-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-faint);
+    line-height: 1;
+  }
+
+  /* Body copy that has to be read, as opposed to scanned. */
+  .measure {
+    max-width: 60ch;
+  }
+
+  /* Specification values — the numbers must line up down the column. */
+  .figures {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A hairline of the brand red under a dark band, used sparingly to close a
+     section without adding another border colour. */
+  .brand-edge {
+    box-shadow: inset 0 -2px 0 0 var(--color-brand);
+  }
 }

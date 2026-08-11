@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Solid charcoal tile: a filled shape reads far better at 16px than a thin
+       mark floating on transparency. -->
+  <rect width="64" height="64" rx="12" fill="#121010"/>
+  <g transform="translate(32 32) scale(0.72) translate(-32 -33.5)">
+    <rect x="12.5" y="17" width="4" height="6" rx="1" fill="#DED8D6"/>
+    <path d="M8 56 L8 28.5 A6.5 6.5 0 0 1 21 28.5 L21 56 A2 2 0 0 1 19 58 L10 58 A2 2 0 0 1 8 56 Z" fill="#DED8D6"/>
+    <rect x="30" y="9" width="4" height="6" rx="1" fill="#ED2B24"/>
+    <path d="M25.5 56 L25.5 20.5 A6.5 6.5 0 0 1 38.5 20.5 L38.5 56 A2 2 0 0 1 36.5 58 L27.5 58 A2 2 0 0 1 25.5 56 Z" fill="#ED2B24"/>
+    <rect x="47.5" y="14" width="4" height="6" rx="1" fill="#DED8D6"/>
+    <path d="M43 56 L43 25.5 A6.5 6.5 0 0 1 56 25.5 L56 56 A2 2 0 0 1 54 58 L45 58 A2 2 0 0 1 43 56 Z" fill="#DED8D6"/>
+  </g>
+</svg>

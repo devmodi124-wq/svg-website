@@ -1,0 +1,664 @@
+<title>Shree Vinayak Gases — Identity Concepts</title>
+
+<style>
+  /* ── Tokens ─────────────────────────────────────────────────────────────
+     Palette pulled from the subject's own world: galvanised sheet, painted
+     cylinder navy, the orange of industrial safety signage. Neutrals carry a
+     deliberate blue bias so nothing reads as default grey.               */
+  :root {
+    --ground:      #F2F4F6;
+    --surface:     #FFFFFF;
+    --surface-alt: #E8ECF0;
+    --ink:         #101922;
+    --muted:       #5C6B7A;
+    --line:        #D3DAE1;
+
+    --navy:        #17324D;
+    --flame:       #E4572E;
+    --steel:       #4A5A6A;
+
+    /* The mark's own inks. These flip for dark grounds, exactly as a real
+       logo's reversed variant would.                                     */
+    --mark-ink:    var(--navy);
+    --mark-steel:  var(--steel);
+    --mark-flame:  var(--flame);
+
+    --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-body:    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono:    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+    --step--1: 0.75rem;
+    --step-0:  0.9375rem;
+    --step-1:  1.125rem;
+    --step-2:  1.5rem;
+    --step-3:  2.25rem;
+    --step-4:  3.25rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:      #0C1219;
+      --surface:     #131C25;
+      --surface-alt: #1B2733;
+      --ink:         #E6ECF2;
+      --muted:       #8B9AA8;
+      --line:        #223040;
+
+      --navy:        #17324D;
+      --flame:       #F2703F;
+      --steel:       #8098AE;
+
+      --mark-ink:    #CFDCE8;
+      --mark-steel:  #8098AE;
+      --mark-flame:  #F2703F;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0C1219;
+    --surface:     #131C25;
+    --surface-alt: #1B2733;
+    --ink:         #E6ECF2;
+    --muted:       #8B9AA8;
+    --line:        #223040;
+    --navy:        #17324D;
+    --flame:       #F2703F;
+    --steel:       #8098AE;
+    --mark-ink:    #CFDCE8;
+    --mark-steel:  #8098AE;
+    --mark-flame:  #F2703F;
+  }
+
+  :root[data-theme="light"] {
+    --ground:      #F2F4F6;
+    --surface:     #FFFFFF;
+    --surface-alt: #E8ECF0;
+    --ink:         #101922;
+    --muted:       #5C6B7A;
+    --line:        #D3DAE1;
+    --navy:        #17324D;
+    --flame:       #E4572E;
+    --steel:       #4A5A6A;
+    --mark-ink:    var(--navy);
+    --mark-steel:  var(--steel);
+    --mark-flame:  var(--flame);
+  }
+
+  /* ── Base ───────────────────────────────────────────────────────────── */
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(var(--step-3), 6vw, var(--step-4));
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 62ch; }
+  .lede { font-size: var(--step-1); color: var(--muted); max-width: 58ch; }
+
+  .intro { display: flex; flex-direction: column; gap: 1rem; }
+
+  /* ── Plate: one concept ─────────────────────────────────────────────── */
+  .plates { display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2.25rem); }
+
+  .plate {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 56rem) {
+    .plate { grid-template-columns: 20rem 1fr; }
+  }
+
+  /* Left: the mark, large, on its own quiet field. */
+  .plate__stage {
+    display: grid;
+    place-items: center;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--line);
+  }
+
+  @media (min-width: 56rem) {
+    .plate__stage { border-bottom: 0; border-right: 1px solid var(--line); }
+  }
+
+  .plate__stage svg { width: clamp(6rem, 18vw, 8.5rem); height: auto; display: block; }
+
+  .plate__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  /* Title block, borrowed from an engineering drawing sheet. */
+  .titleblock {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .titleblock__no {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    color: var(--surface);
+    background: var(--flame);
+    padding: 0.2em 0.5em;
+    font-weight: 600;
+  }
+
+  .titleblock__meta {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .rationale { color: var(--muted); }
+
+  .verdict {
+    font-size: var(--step--1);
+    border-left: 2px solid var(--flame);
+    padding-left: 0.85rem;
+    color: var(--ink);
+  }
+  .verdict b { font-weight: 700; }
+
+  /* ── Applications row ───────────────────────────────────────────────── */
+  .apps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .app {
+    background: var(--surface);
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .app__label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .app__art { display: flex; align-items: center; gap: 0.7rem; min-height: 2.75rem; }
+
+  /* Reversed application: fixed navy field in both themes, since it is
+     demonstrating a real-world use, not following the page theme. */
+  .app--reversed { background: var(--navy); }
+  .app--reversed .app__label { color: #93A9BE; }
+  .app--reversed .lockup__name { color: #FFFFFF; }
+  .app--reversed .lockup__sub { color: #A9BDD0; }
+  .app--reversed { --mark-ink: #FFFFFF; --mark-steel: #93A9BE; }
+
+  /* ── Lockup ─────────────────────────────────────────────────────────── */
+  .lockup { display: flex; align-items: center; gap: 0.7rem; }
+  .lockup svg { width: 2.5rem; height: 2.5rem; flex: none; display: block; }
+  .lockup__text { display: flex; flex-direction: column; line-height: 1.05; }
+  .lockup__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 1.0625rem;
+    color: var(--ink);
+  }
+  .lockup__sub {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2em;
+  }
+
+  .favicons { display: flex; align-items: flex-end; gap: 0.85rem; }
+  .favicons svg { display: block; }
+  .fav-32 { width: 32px; height: 32px; }
+  .fav-16 { width: 16px; height: 16px; }
+
+  /* ── Closing ────────────────────────────────────────────────────────── */
+  .closing {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border-top: 2px solid var(--ink);
+    padding-top: 1.75rem;
+  }
+
+  .notes { display: grid; gap: 1.25rem; }
+  @media (min-width: 44rem) { .notes { grid-template-columns: repeat(2, 1fr); } }
+
+  .note { display: flex; flex-direction: column; gap: 0.4rem; }
+  .note h3 {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--flame);
+    margin: 0;
+  }
+  .note p { font-size: var(--step-0); color: var(--muted); }
+
+  .palette { display: flex; flex-wrap: wrap; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .swatch { flex: 1 1 7rem; background: var(--surface); padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .swatch__chip { height: 2.25rem; border: 1px solid rgba(0,0,0,0.08); }
+  .swatch__name { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .swatch__hex { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  :focus-visible { outline: 2px solid var(--flame); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<!-- ── Mark definitions ──────────────────────────────────────────────────
+     Each mark is authored once as a <symbol> and instanced with <use>, so
+     the same geometry renders at 136px and at 16px with no duplication.
+     Colours come from CSS custom properties, which inherit into the shadow
+     tree — that is what lets the reversed variant work with one class. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- 01 · Valve Nut -->
+  <symbol id="mark-valve" viewBox="0 0 64 64">
+    <polygon points="61,32 46.5,57.11 17.5,57.11 3,32 17.5,6.89 46.5,6.89"
+             fill="none" stroke="var(--mark-ink)" stroke-width="6" stroke-linejoin="round" />
+    <path d="M20 20 L32 44 L44 20" fill="none" stroke="var(--mark-flame)"
+          stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  </symbol>
+
+  <!-- 02 · Cylinder Rack -->
+  <symbol id="mark-cylinders" viewBox="0 0 64 64">
+    <rect x="12.5" y="17" width="4" height="6" rx="1" fill="var(--mark-ink)" />
+    <path d="M8 56 L8 28.5 A6.5 6.5 0 0 1 21 28.5 L21 56 A2 2 0 0 1 19 58 L10 58 A2 2 0 0 1 8 56 Z"
+          fill="var(--mark-ink)" />
+    <rect x="30" y="9" width="4" height="6" rx="1" fill="var(--mark-flame)" />
+    <path d="M25.5 56 L25.5 20.5 A6.5 6.5 0 0 1 38.5 20.5 L38.5 56 A2 2 0 0 1 36.5 58 L27.5 58 A2 2 0 0 1 25.5 56 Z"
+          fill="var(--mark-flame)" />
+    <rect x="47.5" y="14" width="4" height="6" rx="1" fill="var(--mark-ink)" />
+    <path d="M43 56 L43 25.5 A6.5 6.5 0 0 1 56 25.5 L56 56 A2 2 0 0 1 54 58 L45 58 A2 2 0 0 1 43 56 Z"
+          fill="var(--mark-ink)" />
+  </symbol>
+
+  <!-- 03 · Gauge -->
+  <symbol id="mark-gauge" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="26" fill="none" stroke="var(--mark-ink)" stroke-width="6" />
+    <g stroke="var(--mark-steel)" stroke-width="3" stroke-linecap="round">
+      <line x1="17.90" y1="26.87" x2="13.21" y2="25.16" />
+      <line x1="23.40" y1="19.71" x2="20.53" y2="15.62" />
+      <line x1="32"    y1="17"    x2="32"    y2="12"    />
+      <line x1="40.60" y1="19.71" x2="43.47" y2="15.62" />
+      <line x1="46.10" y1="26.87" x2="50.79" y2="25.16" />
+    </g>
+    <line x1="32" y1="32" x2="41.75" y2="18.07" stroke="var(--mark-flame)"
+          stroke-width="6" stroke-linecap="round" />
+    <circle cx="32" cy="32" r="4.5" fill="var(--mark-ink)" />
+  </symbol>
+
+  <!-- 04 · Trikon -->
+  <symbol id="mark-trikon" viewBox="0 0 64 64">
+    <g stroke="var(--mark-steel)" stroke-width="4.5" stroke-linecap="round">
+      <line x1="14" y1="17" x2="50" y2="17" />
+      <line x1="14" y1="17" x2="32" y2="47" />
+      <line x1="50" y1="17" x2="32" y2="47" />
+    </g>
+    <circle cx="14" cy="17" r="7.5" fill="var(--mark-ink)" />
+    <circle cx="50" cy="17" r="7.5" fill="var(--mark-ink)" />
+    <circle cx="32" cy="47" r="8.5" fill="var(--mark-flame)" />
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+  <header class="intro">
+    <p class="eyebrow">Shree Vinayak Gases · Identity · 02 Aug 2026</p>
+    <h1>Four marks. Pick one.</h1>
+    <p class="lede">
+      Every mark below is hand-authored SVG — a few hundred bytes, infinitely sharp,
+      and it drops straight into the site as a React component. Judge them at the
+      small sizes, not the large one: this logo will spend most of its life as a
+      browser tab, a WhatsApp display picture and a corner of an invoice.
+    </p>
+  </header>
+
+  <div class="plates">
+
+    <!-- ── 01 ─────────────────────────────────────────────────────────── -->
+    <section class="plate">
+      <div class="plate__stage"><svg><use href="#mark-valve" /></svg></div>
+      <div class="plate__body">
+        <div class="titleblock">
+          <span class="titleblock__no">01</span>
+          <h2>Valve Nut</h2>
+          <span class="titleblock__meta">Geometric · 2 colour</span>
+        </div>
+        <p class="rationale">
+          A hexagon nut — the most universal shape in any workshop — with the V of
+          Vinayak struck through it. It carries the family name without spelling it,
+          and the hexagon is a shape every fitter and fabricator already trusts.
+        </p>
+        <div class="apps">
+          <div class="app">
+            <span class="app__label">Horizontal lockup</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-valve" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Industrial &amp; Medical Gases</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app app--reversed">
+            <span class="app__label">Reversed</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-valve" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Delhi NCR</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app">
+            <span class="app__label">Favicon 32 / 16</span>
+            <div class="app__art favicons">
+              <svg class="fav-32"><use href="#mark-valve" /></svg>
+              <svg class="fav-16"><use href="#mark-valve" /></svg>
+            </div>
+          </div>
+        </div>
+        <p class="verdict"><b>Strongest at small sizes.</b> The silhouette survives at 16px better than any other option here.</p>
+      </div>
+    </section>
+
+    <!-- ── 02 ─────────────────────────────────────────────────────────── -->
+    <section class="plate">
+      <div class="plate__stage"><svg><use href="#mark-cylinders" /></svg></div>
+      <div class="plate__body">
+        <div class="titleblock">
+          <span class="titleblock__no">02</span>
+          <h2>Cylinder Rack</h2>
+          <span class="titleblock__meta">Literal · 2 colour</span>
+        </div>
+        <p class="rationale">
+          Three cylinders at stepped heights, seen head-on. Nobody has to be told what
+          the business does — a purchase officer scanning ten search results knows in
+          half a second. The stepped heights read as range, and as growth.
+        </p>
+        <div class="apps">
+          <div class="app">
+            <span class="app__label">Horizontal lockup</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-cylinders" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Industrial &amp; Medical Gases</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app app--reversed">
+            <span class="app__label">Reversed</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-cylinders" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Delhi NCR</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app">
+            <span class="app__label">Favicon 32 / 16</span>
+            <div class="app__art favicons">
+              <svg class="fav-32"><use href="#mark-cylinders" /></svg>
+              <svg class="fav-16"><use href="#mark-cylinders" /></svg>
+            </div>
+          </div>
+        </div>
+        <p class="verdict"><b>Clearest meaning, least distinctive.</b> Other gas suppliers use cylinder marks too, so it fits the category rather than standing out in it.</p>
+      </div>
+    </section>
+
+    <!-- ── 03 ─────────────────────────────────────────────────────────── -->
+    <section class="plate">
+      <div class="plate__stage"><svg><use href="#mark-gauge" /></svg></div>
+      <div class="plate__body">
+        <div class="titleblock">
+          <span class="titleblock__no">03</span>
+          <h2>Gauge</h2>
+          <span class="titleblock__meta">Technical · 3 colour</span>
+        </div>
+        <p class="rationale">
+          A pressure gauge with the needle in the safe band. It is the one instrument
+          on every regulator, and it quietly says the thing the business actually sells
+          — not gas, but a supply you can rely on. Competitors reach for cylinders and
+          flames; almost nobody reaches for the dial.
+        </p>
+        <div class="apps">
+          <div class="app">
+            <span class="app__label">Horizontal lockup</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-gauge" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Industrial &amp; Medical Gases</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app app--reversed">
+            <span class="app__label">Reversed</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-gauge" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Delhi NCR</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app">
+            <span class="app__label">Favicon 32 / 16</span>
+            <div class="app__art favicons">
+              <svg class="fav-32"><use href="#mark-gauge" /></svg>
+              <svg class="fav-16"><use href="#mark-gauge" /></svg>
+            </div>
+          </div>
+        </div>
+        <p class="verdict"><b>Most distinctive, most fragile.</b> The tick marks blur below about 24px — a simplified ticks-free variant would be needed for the favicon.</p>
+      </div>
+    </section>
+
+    <!-- ── 04 ─────────────────────────────────────────────────────────── -->
+    <section class="plate">
+      <div class="plate__stage"><svg><use href="#mark-trikon" /></svg></div>
+      <div class="plate__body">
+        <div class="titleblock">
+          <span class="titleblock__no">04</span>
+          <h2>Trikon</h2>
+          <span class="titleblock__meta">Abstract · 3 colour</span>
+        </div>
+        <p class="rationale">
+          Three bonded atoms arranged into a downward V. It reads as a molecule to a
+          lab buyer, as a stable tripod to a factory buyer, and as the V of Vinayak to
+          you — three honest readings from one shape, with no religious imagery to
+          manage on invoices and delivery challans.
+        </p>
+        <div class="apps">
+          <div class="app">
+            <span class="app__label">Horizontal lockup</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-trikon" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Industrial &amp; Medical Gases</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app app--reversed">
+            <span class="app__label">Reversed</span>
+            <div class="app__art">
+              <span class="lockup">
+                <svg><use href="#mark-trikon" /></svg>
+                <span class="lockup__text">
+                  <span class="lockup__name">Shree Vinayak Gases</span>
+                  <span class="lockup__sub">Delhi NCR</span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="app">
+            <span class="app__label">Favicon 32 / 16</span>
+            <div class="app__art favicons">
+              <svg class="fav-32"><use href="#mark-trikon" /></svg>
+              <svg class="fav-16"><use href="#mark-trikon" /></svg>
+            </div>
+          </div>
+        </div>
+        <p class="verdict"><b>Most modern, least specific.</b> It could belong to a chemicals or a software firm — which is either range or vagueness, depending on how you want to be seen.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── Palette ────────────────────────────────────────────────────────── -->
+  <section class="closing">
+    <h2>The palette behind all four</h2>
+    <p class="rationale">
+      One navy that holds the brand, one orange that does all the shouting, and a
+      blue-biased steel grey for everything in between. Whichever mark you pick, the
+      site is built on these.
+    </p>
+    <div class="palette">
+      <div class="swatch">
+        <span class="swatch__chip" style="background:#17324D"></span>
+        <span class="swatch__name">Cylinder Navy</span>
+        <span class="swatch__hex">#17324D</span>
+      </div>
+      <div class="swatch">
+        <span class="swatch__chip" style="background:#E4572E"></span>
+        <span class="swatch__name">Safety Flame</span>
+        <span class="swatch__hex">#E4572E</span>
+      </div>
+      <div class="swatch">
+        <span class="swatch__chip" style="background:#4A5A6A"></span>
+        <span class="swatch__name">Steel</span>
+        <span class="swatch__hex">#4A5A6A</span>
+      </div>
+      <div class="swatch">
+        <span class="swatch__chip" style="background:#F2F4F6"></span>
+        <span class="swatch__name">Galvanised</span>
+        <span class="swatch__hex">#F2F4F6</span>
+      </div>
+      <div class="swatch">
+        <span class="swatch__chip" style="background:#101922"></span>
+        <span class="swatch__name">Ink</span>
+        <span class="swatch__hex">#101922</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Notes ──────────────────────────────────────────────────────────── -->
+  <section class="closing">
+    <h2>Before you choose</h2>
+    <div class="notes">
+      <div class="note">
+        <h3>On the Ganesha question</h3>
+        <p>
+          None of these use Ganesha imagery. It would be meaningful for a family firm,
+          but a deity on a cylinder cap, a delivery truck and a GST invoice is hard to
+          retire later and awkward to place. Concept 04 gets at the same idea through
+          geometry. Say the word and I will draw a fifth that goes there directly.
+        </p>
+      </div>
+      <div class="note">
+        <h3>Judge the favicon column</h3>
+        <p>
+          Most of a small supplier's brand impressions are a 16px tab icon next to five
+          competitors' tabs. Concept 01 wins that test outright. Concept 03 loses it
+          unless we draw a simplified variant.
+        </p>
+      </div>
+      <div class="note">
+        <h3>Nothing here is locked</h3>
+        <p>
+          Colour, weight and proportion are all still open. Pick a direction and I will
+          refine it — different accent, heavier strokes, a stacked lockup for the
+          letterhead, whatever it needs.
+        </p>
+      </div>
+      <div class="note">
+        <h3>What happens next</h3>
+        <p>
+          Your pick becomes <code>components/Logo.tsx</code>, the favicon, the Open Graph
+          image and the WhatsApp display picture. Then I build the home page around it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
