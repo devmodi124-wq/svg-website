@@ -1,0 +1,19 @@
+# Cloudflare's static-assets server sets Content-Type from a file's
+# extension. /opengraph-image and /twitter-image are Next's file-convention
+# routes (app/opengraph-image.tsx, app/twitter-image.tsx) — under
+# `output: "export"` Next writes their PNG bytes to `out/` with no extension
+# at all, because the framework's own Content-Type header is only wired up
+# for its Node/edge server runtime, which a static export doesn't have.
+# Confirmed locally: `curl -D-` against `wrangler dev` returns 200 with the
+# correct bytes but no Content-Type header for these two paths, while an
+# extensioned file like favicon.svg gets image/svg+xml automatically.
+#
+# Without this, WhatsApp, LinkedIn, Twitter/X and Slack link previews single
+# out these two paths and either skip the image or refuse to render it,
+# because their unfurlers require an image/* Content-Type, not just an
+# image's actual bytes.
+/opengraph-image
+  Content-Type: image/png
+
+/twitter-image
+  Content-Type: image/png
