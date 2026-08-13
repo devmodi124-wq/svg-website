@@ -33,6 +33,12 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# ...except the production build values, which are committed on purpose: they
+# are public business facts the site already prints on every page, and keeping
+# them in git stops a misconfigured dashboard from shipping the placeholder
+# phone number to a live site. See the header of .env.production.
+!.env.production
+
 # vercel
 .vercel
 
