@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cloudflare — local wrangler state, not deployment config.
+# wrangler.jsonc IS committed: without it, wrangler auto-detects "Next.js",
+# installs the OpenNext server adapter and fails, because this site is a
+# static export with no server build.
+.wrangler
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -1,0 +1,38 @@
+{
+  // Deployment config for Cloudflare Workers static assets.
+  //
+  // ── Why this file has to exist ──────────────────────────────────────────────
+  //
+  // Without it, `wrangler deploy` runs framework auto-detection, sees Next.js,
+  // and installs the OpenNext server adapter — which then looks for
+  // `.next/standalone` and fails, because `next.config.ts` sets
+  // `output: "export"` and there is no server build to find. On a CI runner
+  // wrangler answers its own "Proceed with setup?" prompt with yes, so there is
+  // nothing to decline. The only way to stop it is to be explicit.
+  //
+  // This site is plain HTML/CSS/JS. There is no `main` worker script — assets
+  // are served straight from the edge, which is what makes it free and fast.
+  //
+  // Wrangler itself is deliberately NOT a devDependency: it would add ~250
+  // packages (workerd, esbuild) to every CI install to deploy a folder of
+  // static files. Cloudflare's deploy step fetches it via npx instead, and the
+  // schema is referenced by URL so editors can still validate this file.
+  "$schema": "https://developers.cloudflare.com/schemas/wrangler.json",
+  "name": "svg-website",
+  "compatibility_date": "2026-08-13",
+  "assets": {
+    "directory": "./out",
+
+    // `trailingSlash: true` emits /contact/index.html. This serves that at
+    // /contact and /contact/ alike, rather than 404ing on the bare path.
+    "html_handling": "auto-trailing-slash",
+
+    // Serve the exported 404.html on a miss. The default returns a bare
+    // Cloudflare error page, which would drop a lost visitor off the site
+    // entirely instead of onto our own page with the phone number on it.
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
