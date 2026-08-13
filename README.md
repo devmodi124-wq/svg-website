@@ -8,7 +8,6 @@ Ghaziabad. Built to rank locally and turn searches into WhatsApp enquiries.
 See [`PLAN.md`](./PLAN.md) for the full plan, phase breakdown and open items.
 
 ---
-
 ## Running it
 
 ```bash
