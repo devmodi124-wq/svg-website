@@ -66,6 +66,11 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
+  // Google Search Console ownership check for the URL-prefix property
+  // https://shreevinayakgases.in/ — a fixed per-property token, not
+  // configuration, so it's a literal rather than an env var. Must stay in
+  // place permanently: Search Console re-checks it, not just at setup.
+  verification: { google: "z2es3cXnlNSgh3WSbntSG2ak7jCjv31T13SgV1QyDBI" },
 };
 
 export default function RootLayout({
