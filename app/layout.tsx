@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyCta } from "@/components/StickyCta";
 import { LocalBusinessSchema } from "@/components/Schema";
+import { Analytics } from "@/components/Analytics";
 import { siteConfig } from "@/site.config";
 
 /**
@@ -83,6 +84,7 @@ export default function RootLayout({
     >
       {/* Bottom padding clears the fixed mobile CTA bar. */}
       <body className="flex min-h-full flex-col bg-graphite pb-[52px] lg:pb-0">
+        <Analytics />
         <LocalBusinessSchema />
         <Header />
         <main className="flex-1">{children}</main>
