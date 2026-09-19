@@ -70,15 +70,12 @@ export const siteConfig = {
   address: {
     street: or(
       process.env.NEXT_PUBLIC_ADDRESS_STREET,
-      "Opp. Cell Industrial Area",
+      "Site No. 4, 104, Block C, Jhandapur, Sahibabad Industrial Area Site 4",
     ),
-    locality: or(
-      process.env.NEXT_PUBLIC_ADDRESS_LOCALITY,
-      "Sahibabad Town, Sahibabad",
-    ),
+    locality: or(process.env.NEXT_PUBLIC_ADDRESS_LOCALITY, "Sahibabad"),
     city: or(process.env.NEXT_PUBLIC_ADDRESS_CITY, "Ghaziabad"),
     state: "Uttar Pradesh",
-    postalCode: or(process.env.NEXT_PUBLIC_ADDRESS_PIN, "201005"),
+    postalCode: or(process.env.NEXT_PUBLIC_ADDRESS_PIN, "201010"),
     country: "IN",
     latitude: 28.6687396,
     longitude: 77.351196,

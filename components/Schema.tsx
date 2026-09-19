@@ -1,5 +1,5 @@
 import { siteConfig } from "@/site.config";
-import { products, type Product } from "@/data/products";
+import type { Product } from "@/data/products";
 import type { Faq } from "@/lib/faqs";
 
 /**
@@ -56,19 +56,14 @@ export function LocalBusinessSchema() {
       "@type": "City",
       name: area,
     })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Industrial and Medical Gases",
-      itemListElement: products.map((product) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: product.name,
-          description: product.summary,
-          url: `${siteConfig.url}/products/#${product.slug}`,
-        },
-      })),
-    },
+    // No `hasOfferCatalog` here on purpose. Each gas already gets its own
+    // correctly-scoped `Product` entity via ProductSchema on its own page.
+    // Duplicating a stripped-down copy of every product here would repeat the
+    // same "missing offers/review/aggregateRating" validation warning across
+    // every page on the site, since this schema is rendered sitewide from the
+    // root layout — one real product page carrying that warning is a rounding
+    // error, 23 pages all carrying it is a red flag Search Console surfaces
+    // as a systemic issue.
   };
 
   return (
