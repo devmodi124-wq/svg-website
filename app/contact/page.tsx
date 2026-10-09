@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   title: "Contact — Get a Quote",
   description:
     `Contact ${siteConfig.name} for industrial and medical gas supply in ` +
-    `Ghaziabad and Delhi NCR. Call, WhatsApp, or send an enquiry and we will ` +
-    `quote the same working day.`,
+    `Ghaziabad and Delhi NCR. Call, WhatsApp or send an enquiry — we quote ` +
+    `the same working day.`,
   alternates: { canonical: "/contact/" },
 };
 

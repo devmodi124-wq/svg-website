@@ -11,8 +11,6 @@ export const dynamic = "force-static";
  * adding a gas to data/products.ts puts it in the sitemap automatically.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${siteConfig.url}/`, changeFrequency: "monthly", priority: 1 },
     {
@@ -45,8 +43,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...productRoutes].map((route) => ({
-    ...route,
-    lastModified: now,
-  }));
+  // No `lastModified`: the only date available is the build time, which would
+  // stamp every URL as changed on every deploy. Google stops trusting lastmod
+  // for a site that does that, so omitting it is better than a false one.
+  return [...staticRoutes, ...productRoutes];
 }

@@ -75,6 +75,30 @@ export function LocalBusinessSchema() {
   );
 }
 
+/**
+ * Tells Google the site's name, so results can show "Shree Vinayak Gas" rather
+ * than the bare domain. `alternateName` covers searches for the short form.
+ */
+export function WebSiteSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    name: siteConfig.name,
+    alternateName: siteConfig.shortName,
+    url: `${siteConfig.url}/`,
+    inLanguage: "en-IN",
+    publisher: { "@id": `${siteConfig.url}/#business` },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 const DAY_NAMES: Record<string, string> = {
   Mo: "Monday",
   Tu: "Tuesday",

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     `${siteConfig.name} is a GST-registered industrial and medical gas supplier ` +
     `in ${siteConfig.address.locality}, ${siteConfig.address.city}, serving ` +
-    `factories, hospitals and laboratories across Delhi NCR.`,
+    `factories, hospitals and labs across Delhi NCR.`,
   alternates: { canonical: "/about/" },
 };
 

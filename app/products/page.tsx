@@ -15,9 +15,8 @@ import { industries } from "@/data/industries";
 export const metadata: Metadata = {
   title: "Industrial & Medical Gases — Full Product Range",
   description:
-    "Oxygen, nitrogen, argon, CO₂, acetylene (DA), helium, hydrogen, nitrous oxide, " +
-    "ammonia, welding mixtures and dry ice. Cylinder supply, refill and exchange " +
-    "across Ghaziabad and Delhi NCR.",
+    "Oxygen, nitrogen, argon, CO₂, acetylene, helium, hydrogen, nitrous oxide, " +
+    "ammonia, welding mixtures and dry ice. Supplied across Ghaziabad and Delhi NCR.",
   alternates: { canonical: "/products/" },
 };
 

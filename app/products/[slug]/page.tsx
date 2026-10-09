@@ -44,17 +44,36 @@ export async function generateMetadata({
 
   const title = `${product.name} Supplier in Ghaziabad & Delhi NCR`;
 
+  // The root template appends " | Shree Vinayak Gas". Past ~65 characters
+  // Google truncates the title mid-phrase, so drop the brand suffix on the
+  // long ones; the gas and location are what the searcher is matching on.
+  const fitsWithBrand = `${title} | ${siteConfig.name}`.length <= 65;
+
+  // Summary first, then as much of the supply line as stays under the ~160
+  // character snippet cut-off.
+  const supply = `Cylinder supply and refill from ${siteConfig.address.locality}, ${siteConfig.address.city}.`;
+  const quote = "Same-day quotes.";
+  const description = [product.summary, supply, quote].reduce((text, part) =>
+    `${text} ${part}`.length <= 160 ? `${text} ${part}` : text,
+  );
+
   return {
-    title,
-    description: `${product.summary} Cylinder supply, refill and exchange from ${siteConfig.name}, ${siteConfig.address.locality}, ${siteConfig.address.city}. Same-day quotes.`,
+    title: fitsWithBrand ? title : { absolute: title },
+    description,
     keywords: product.keywords,
     alternates: { canonical: `/products/${product.slug}/` },
+    // Next replaces the parent's openGraph/twitter objects rather than merging
+    // them, so anything not repeated here is dropped from this page. The image
+    // itself comes from ./opengraph-image.tsx and ./twitter-image.tsx.
     openGraph: {
       type: "article",
       title,
       description: product.summary,
       url: `${siteConfig.url}/products/${product.slug}/`,
+      siteName: siteConfig.name,
+      locale: "en_IN",
     },
+    twitter: { card: "summary_large_image", title, description: product.summary },
   };
 }
 

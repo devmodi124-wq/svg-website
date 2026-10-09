@@ -17,3 +17,33 @@
 
 /twitter-image
   Content-Type: image/png
+
+# The per-gas social previews (app/products/[slug]/opengraph-image.tsx and
+# twitter-image.tsx) are extensionless for the same reason as the two above.
+/products/*/opengraph-image
+  Content-Type: image/png
+
+/products/*/twitter-image
+  Content-Type: image/png
+
+# ── Caching ─────────────────────────────────────────────────────────────────
+# /_next/static/ filenames are content hashes, so a given URL never changes
+# and can be cached for a year.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# /images/ and the social previews keep stable filenames when replaced (see
+# IMAGES.md), so they can't be immutable. A week, then revalidate in the
+# background, means repeat visitors skip the download without a swapped
+# photograph taking more than a week to appear.
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# ── Security ────────────────────────────────────────────────────────────────
+# Applied to every response. No Content-Security-Policy on purpose: GA4 needs
+# an inline init script and a policy loose enough to allow it adds little.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()

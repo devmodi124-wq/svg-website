@@ -1,9 +1,7 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
-
 import { siteConfig } from "@/site.config";
 import { products } from "@/data/products";
+import { loadOgFonts } from "@/lib/og-fonts";
 
 /**
  * The image every WhatsApp forward, LinkedIn share and search-result snippet
@@ -27,15 +25,6 @@ export const contentType = "image/png";
 export const dynamic = "force-static";
 
 export default async function OpengraphImage() {
-  const fontDir = join(process.cwd(), "app/assets/fonts");
-  const [tinosRegular, tinosBold, plexRegular, plexSemibold] =
-    await Promise.all([
-      readFile(join(fontDir, "Tinos-Regular.ttf")),
-      readFile(join(fontDir, "Tinos-Bold.ttf")),
-      readFile(join(fontDir, "IBMPlexSans-Regular.ttf")),
-      readFile(join(fontDir, "IBMPlexSans-SemiBold.ttf")),
-    ]);
-
   return new ImageResponse(
     (
       <div
@@ -127,22 +116,7 @@ export default async function OpengraphImage() {
     ),
     {
       ...size,
-      fonts: [
-        { name: "Tinos", data: tinosRegular, weight: 400, style: "normal" },
-        { name: "Tinos", data: tinosBold, weight: 700, style: "normal" },
-        {
-          name: "IBM Plex Sans",
-          data: plexRegular,
-          weight: 400,
-          style: "normal",
-        },
-        {
-          name: "IBM Plex Sans",
-          data: plexSemibold,
-          weight: 600,
-          style: "normal",
-        },
-      ],
+      fonts: [...(await loadOgFonts())],
     },
   );
 }

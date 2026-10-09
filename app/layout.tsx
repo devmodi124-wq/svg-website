@@ -5,7 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyCta } from "@/components/StickyCta";
-import { LocalBusinessSchema } from "@/components/Schema";
+import { LocalBusinessSchema, WebSiteSchema } from "@/components/Schema";
 import { Analytics } from "@/components/Analytics";
 import { siteConfig } from "@/site.config";
 
@@ -38,19 +38,9 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: siteConfig.metaDescription,
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.name }],
-  keywords: [
-    "industrial gas supplier ghaziabad",
-    "industrial gas supplier delhi ncr",
-    "oxygen gas supplier ghaziabad",
-    "nitrogen cylinder supplier delhi ncr",
-    "argon gas supplier ghaziabad",
-    "medical oxygen supplier delhi ncr",
-    "acetylene DA gas supplier",
-    "gas cylinder supplier sahibabad",
-  ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -58,12 +48,12 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
+    description: siteConfig.metaDescription,
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
+    description: siteConfig.metaDescription,
   },
   robots: { index: true, follow: true },
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
@@ -86,6 +76,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-graphite pb-[52px] lg:pb-0">
         <Analytics />
         <LocalBusinessSchema />
+        <WebSiteSchema />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

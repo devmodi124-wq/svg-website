@@ -44,6 +44,14 @@ export const siteConfig = {
     "units across Ghaziabad and Delhi NCR.",
 
   /**
+   * Search-result and link-preview copy. Kept under ~155 characters because
+   * Google cuts snippets there; `description` above is the longer form used in
+   * structured data, where length doesn't matter.
+   */
+  metaDescription:
+    "Oxygen, nitrogen, argon, CO₂, acetylene and specialty gases for factories, hospitals and labs in Ghaziabad and Delhi NCR. Same-day quotes.",
+
+  /**
    * The firm's own founding year, which matches its GST registration.
    *
    * The family's earlier history in the trade — the predecessor partnership and
