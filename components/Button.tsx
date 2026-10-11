@@ -12,9 +12,9 @@ type Variant = "brand" | "outline" | "quiet" | "whatsapp";
 type Size = "sm" | "md" | "lg";
 
 const VARIANTS: Record<Variant, string> = {
-  brand: "bg-brand text-brand-ink hover:bg-brand-deep",
+  brand: "bg-brand-action text-brand-ink hover:bg-brand-deep",
   outline:
-    "border border-seam-bright text-bright hover:border-brand hover:bg-brand hover:text-brand-ink",
+    "border border-seam-bright text-bright hover:border-brand-action hover:bg-brand-action hover:text-brand-ink",
   quiet:
     "border border-seam text-plain hover:border-seam-bright hover:text-bright",
   whatsapp: "bg-whatsapp text-whatsapp-ink hover:brightness-110",

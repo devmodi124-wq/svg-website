@@ -1,4 +1,5 @@
 import { CameraIcon, ShieldIcon } from "./Icons";
+import { imageManifest } from "@/lib/image-manifest";
 
 /**
  * A photograph, or a designed placeholder standing in for one.
@@ -20,7 +21,11 @@ import { CameraIcon, ShieldIcon } from "./Icons";
  * To fill a slot: drop the file in `public/images/` and pass `src`.
  *
  * `next/image` is not used because this is a static export with optimisation
- * disabled — a plain <img> ships the same bytes with less machinery.
+ * disabled. Instead scripts/optimise-images.mjs pre-renders each image at a few
+ * widths and records them in lib/image-manifest.ts; this component turns that
+ * into `srcset`, so a phone downloads the 480–800px file rather than the
+ * desktop one. `sizes` must describe the slot's rendered width honestly — the
+ * browser picks the file from it.
  */
 export function ImageSlot({
   src,
@@ -31,6 +36,7 @@ export function ImageSlot({
   aspect = "4/3",
   className = "",
   priority = false,
+  sizes = "100vw",
 }: {
   src?: string;
   alt: string;
@@ -39,6 +45,8 @@ export function ImageSlot({
   aspect?: "4/3" | "3/2" | "16/9" | "1/1";
   className?: string;
   priority?: boolean;
+  /** How wide the slot renders, as a `sizes` attribute. */
+  sizes?: string;
 }) {
   const ratio = {
     "4/3": "aspect-[4/3]",
@@ -48,12 +56,29 @@ export function ImageSlot({
   }[aspect];
 
   if (src) {
+    const meta = imageManifest[src];
+    const srcSet = meta
+      ? [
+          ...meta.variants.map(
+            (w) => `${src.replace(/\.webp$/, `-${w}.webp`)} ${w}w`,
+          ),
+          `${src} ${meta.width}w`,
+        ].join(", ")
+      : undefined;
+
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
+        srcSet={srcSet}
+        sizes={srcSet ? sizes : undefined}
+        // Intrinsic size lets the browser reserve space before the file
+        // arrives; CSS still scales it, and the aspect class sets the box.
+        width={meta?.width}
+        height={meta?.height}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
         decoding="async"
         className={`${ratio} w-full object-cover ${className}`}
       />

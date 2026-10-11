@@ -116,6 +116,7 @@ export default function IndustriesPage() {
                     wants={`A customer site in ${industry.name} — cylinders in use on the floor`}
                     alt={`Industrial gas in use in ${industry.name.toLowerCase()}`}
                     aspect="16/9"
+                    sizes="(min-width: 1024px) 630px, calc(100vw - 40px)"
                   />
                   <p className="caption">Gases we supply to this sector</p>
                   <ul className="flex flex-col border-t border-seam">

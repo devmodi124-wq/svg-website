@@ -17,7 +17,7 @@ export function StickyCta() {
       <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-seam lg:hidden">
         <a
           href={siteConfig.contact.phoneHref}
-          className="flex items-center justify-center gap-2 bg-brand py-3.5 text-sm font-bold text-brand-ink"
+          className="flex items-center justify-center gap-2 bg-brand-action py-3.5 text-sm font-bold text-brand-ink"
         >
           <PhoneIcon className="h-5 w-5" />
           Call now

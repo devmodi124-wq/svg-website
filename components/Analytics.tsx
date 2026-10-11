@@ -9,6 +9,12 @@ import Script from "next/script";
  * still succeeds — matching how EnquiryForm degrades when its endpoint is
  * missing, rather than shipping a broken script tag.
  *
+ * `lazyOnload` rather than `afterInteractive`: gtag.js is ~180 KB and nothing
+ * on the site depends on it (no custom events — page views only), so it waits
+ * for the page's own load event and an idle moment instead of competing with
+ * the hero image and hydration. The cost is a visitor who leaves before the
+ * page finishes loading is not counted, which on a site this size is noise.
+ *
  * No consent-mode setup: the business serves Ghaziabad and Delhi NCR only,
  * so EEA/UK consent requirements don't apply here.
  */
@@ -20,9 +26,9 @@ export function Analytics() {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

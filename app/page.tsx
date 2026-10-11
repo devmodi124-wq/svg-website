@@ -85,6 +85,7 @@ function Hero() {
             alt="Industrial gas cylinders racked and chained, ready for delivery"
             aspect="4/3"
             priority
+            sizes="(min-width: 1024px) 550px, calc(100vw - 40px)"
           />
         </div>
       </div>
@@ -216,6 +217,7 @@ function Industries() {
           wants="Your own delivery vehicle loaded with cylinders, or the godown with stock racked"
           alt="Gas cylinders loaded on a delivery truck"
           aspect="3/2"
+          sizes="(min-width: 1024px) 520px, calc(100vw - 40px)"
         />
       </div>
 

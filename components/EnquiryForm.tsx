@@ -68,7 +68,7 @@ export function EnquiryForm() {
   if (!endpoint) {
     return (
       <div className="flex flex-col gap-5 border border-seam bg-shell p-7">
-        <h3 className="text-3xl">Send us your requirement</h3>
+        <h2 className="text-3xl">Send us your requirement</h2>
         <p className="text-base leading-relaxed text-dim">
           The enquiry form is not connected yet. In the meantime, WhatsApp is the
           fastest way to reach us — messages are answered the same working day.
@@ -96,7 +96,7 @@ export function EnquiryForm() {
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand">
           <CheckIcon className="h-6 w-6 text-brand-ink" />
         </span>
-        <h3 className="text-3xl">Enquiry received</h3>
+        <h2 className="text-3xl">Enquiry received</h2>
         <p className="measure text-base leading-relaxed text-dim">
           We will get back to you with a quote on the number you provided,
           usually the same working day. If it is urgent, WhatsApp us and we will
@@ -125,7 +125,7 @@ export function EnquiryForm() {
       className="flex flex-col gap-6 border border-seam bg-shell p-6 md:p-8"
     >
       <div className="flex flex-col gap-2">
-        <h3 className="text-3xl">Send us your requirement</h3>
+        <h2 className="text-3xl">Send us your requirement</h2>
         <p className="text-base text-dim">
           Tell us the gas and roughly how much you need — that is enough for us
           to quote.
@@ -228,7 +228,7 @@ export function EnquiryForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center justify-center gap-2 bg-brand px-7 py-3.5 font-semibold text-brand-ink transition-colors hover:bg-brand-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 bg-brand-action px-7 py-3.5 font-semibold text-brand-ink transition-colors hover:bg-brand-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "sending" ? "Sending…" : "Send enquiry"}
         </button>

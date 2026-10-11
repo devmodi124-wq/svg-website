@@ -234,6 +234,7 @@ export default async function ProductPage({
               wants={`${product.name} in use — the application, not a product shot on white`}
               alt={`${product.name} in use — supplied across Ghaziabad and Delhi NCR`}
               aspect="4/3"
+              sizes="(min-width: 1024px) 480px, calc(100vw - 40px)"
             />
 
             <div className="flex flex-col border border-seam bg-shell">

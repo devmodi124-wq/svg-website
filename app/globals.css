@@ -36,6 +36,10 @@
   --color-brand: #ed2b24;
   --color-brand-bright: #ff6b62;
   --color-brand-deep: #c21c16;
+  /* Fill for buttons that carry white text. `brand` itself is 4.22:1 against
+     white, under the 4.5:1 AA bar; this is 4.99:1 and still reads as the same
+     red. Logo and accents keep `brand`. */
+  --color-brand-action: #d9231c;
   --color-brand-ink: #ffffff;
 
   --color-whatsapp: #25d366;

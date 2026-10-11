@@ -14,9 +14,12 @@ type Tone = "default" | "mono";
 export function LogoMark({
   tone = "default",
   className,
+  decorative = false,
 }: {
   tone?: Tone;
   className?: string;
+  /** Hide from assistive tech when the name is already written beside it. */
+  decorative?: boolean;
 }) {
   const ink = tone === "mono" ? "currentColor" : "var(--color-plain)";
   const accent = tone === "mono" ? "currentColor" : "var(--color-brand)";
@@ -25,8 +28,9 @@ export function LogoMark({
     <svg
       viewBox="0 0 64 64"
       className={className}
-      role="img"
-      aria-label={`${siteConfig.name} logo`}
+      {...(decorative
+        ? { "aria-hidden": true }
+        : { role: "img", "aria-label": `${siteConfig.name} logo` })}
     >
       {/* Left cylinder — valve stub, then body with domed shoulder. */}
       <rect x="12.5" y="17" width="4" height="6" rx="1" fill={ink} />
@@ -59,7 +63,7 @@ export function Logo({
 }) {
   return (
     <span className={`flex items-center gap-3 ${className}`}>
-      <LogoMark className="h-9 w-9 shrink-0" />
+      <LogoMark className="h-9 w-9 shrink-0" decorative />
       <span className="flex flex-col leading-none">
         {/* The wordmark, as supplied: serif, bold, brand red. */}
         <span className="font-display text-[1.35rem] leading-none font-bold tracking-[-0.01em] text-brand">

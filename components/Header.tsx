@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-seam bg-graphite/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-5 py-3.5 md:px-8">
-        <Link href="/" aria-label={`${siteConfig.name} — home`}>
+        <Link href="/">
           <Logo />
         </Link>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Button } from "@/components/Button";
+import { MapEmbed } from "@/components/MapEmbed";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { BreadcrumbSchema } from "@/components/Schema";
 import {
@@ -110,34 +111,28 @@ export default function ContactPage() {
               <h2 className="text-4xl md:text-5xl">Where we are</h2>
 
               <dl className="flex flex-col border-t border-seam">
-                <div className="flex gap-4 border-b border-seam py-4">
-                  <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-bright" />
-                  <div className="flex flex-col gap-1">
-                    <dt className="text-sm text-faint">Address</dt>
-                    <dd className="text-base leading-relaxed text-bright">
-                      {addressLine}
-                    </dd>
-                  </div>
+                <div className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-4 gap-y-1 border-b border-seam py-4">
+                  <PinIcon className="row-span-2 mt-0.5 h-5 w-5 text-brand-bright" />
+                  <dt className="text-sm text-faint">Address</dt>
+                  <dd className="text-base leading-relaxed text-bright">
+                    {addressLine}
+                  </dd>
                 </div>
 
-                <div className="flex gap-4 border-b border-seam py-4">
-                  <ClockIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-bright" />
-                  <div className="flex flex-col gap-1">
-                    <dt className="text-sm text-faint">Hours</dt>
-                    <dd className="figures text-base text-bright">
-                      {hours.display}
-                    </dd>
-                  </div>
+                <div className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-4 gap-y-1 border-b border-seam py-4">
+                  <ClockIcon className="row-span-2 mt-0.5 h-5 w-5 text-brand-bright" />
+                  <dt className="text-sm text-faint">Hours</dt>
+                  <dd className="figures text-base text-bright">
+                    {hours.display}
+                  </dd>
                 </div>
 
-                <div className="flex gap-4 border-b border-seam py-4">
-                  <MailIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-bright" />
-                  <div className="flex min-w-0 flex-col gap-1">
-                    <dt className="text-sm text-faint">GSTIN</dt>
-                    <dd className="figures text-base break-all text-bright">
-                      {siteConfig.gstin}
-                    </dd>
-                  </div>
+                <div className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-4 gap-y-1 border-b border-seam py-4">
+                  <MailIcon className="row-span-2 mt-0.5 h-5 w-5 text-brand-bright" />
+                  <dt className="text-sm text-faint">GSTIN</dt>
+                  <dd className="figures text-base break-all text-bright">
+                    {siteConfig.gstin}
+                  </dd>
                 </div>
               </dl>
 
@@ -149,18 +144,11 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Map. loading="lazy" keeps it off the critical path — it is well
-                below the fold and the iframe is heavy on a 4G connection. */}
-            <div className="aspect-[4/3] w-full border border-seam bg-shell">
-              <iframe
-                src={mapEmbed}
-                title={`Map showing ${siteConfig.name} in ${address.city}`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-full w-full"
-                style={{ border: 0 }}
-              />
-            </div>
+            <MapEmbed
+              src={mapEmbed}
+              title={`Map showing ${siteConfig.name} in ${address.city}`}
+              address={addressLine}
+            />
 
             <div className="flex flex-col gap-3 border-l-2 border-brand bg-shell px-5 py-4">
               <h3 className="text-sm font-semibold text-bright">
