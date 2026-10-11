@@ -11,6 +11,7 @@ const NAV = [
   { href: "/", label: "Home" },
   { href: "/products/", label: "Gases" },
   { href: "/industries/", label: "Industries" },
+  { href: "/sahibabad-industrial-area/", label: "Sahibabad Industrial Area" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
 ];

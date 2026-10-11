@@ -19,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${siteConfig.url}/sahibabad-industrial-area/`,
+      changeFrequency: "monthly",
+      // The page that targets the business's home turf — the strongest local
+      // match for "gas supplier Sahibabad", so it ranks with the catalogue.
+      priority: 0.9,
+    },
+    {
       url: `${siteConfig.url}/industries/`,
       changeFrequency: "monthly",
       priority: 0.8,

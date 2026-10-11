@@ -52,10 +52,15 @@ export function LocalBusinessSchema() {
         closes,
       };
     }),
-    areaServed: siteConfig.serviceAreas.map((area) => ({
-      "@type": "City",
-      name: area,
-    })),
+    areaServed: [
+      ...siteConfig.serviceAreas.map((area) => ({
+        "@type": "City",
+        name: area,
+      })),
+      // Regular routes are the NCR cities above; elsewhere is supplied on
+      // request (see the contact page), which is what this entry states.
+      { "@type": "Country", name: "India" },
+    ],
     // No `hasOfferCatalog` here on purpose. Each gas already gets its own
     // correctly-scoped `Product` entity via ProductSchema on its own page.
     // Duplicating a stripped-down copy of every product here would repeat the

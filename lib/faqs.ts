@@ -30,7 +30,8 @@ export function productFaqs(product: Product): Faq[] {
       answer:
         `Yes. ${siteConfig.name} supplies ${product.name} across ${areas} and ` +
         `the wider Delhi NCR industrial belt, from our base in ` +
-        `${siteConfig.address.locality}, ${siteConfig.address.city}.`,
+        `${siteConfig.address.locality}, ${siteConfig.address.city}. ` +
+        `Elsewhere in India we supply on request.`,
     },
     {
       question: `What is ${product.name} used for?`,

@@ -156,8 +156,9 @@ export default function ContactPage() {
               </h3>
               <p className="text-base leading-relaxed text-dim">
                 {siteConfig.serviceAreas.slice(0, -1).join(", ")} — and the wider
-                Delhi NCR industrial belt. Outside this area, ask us and we will
-                tell you honestly whether we can service you.
+                Delhi NCR industrial belt. Further afield we supply on request —
+                send us the gas, quantity and location and we will confirm
+                availability and lead time.
               </p>
             </div>
           </div>

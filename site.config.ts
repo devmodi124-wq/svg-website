@@ -107,6 +107,9 @@ export const siteConfig = {
   serviceAreas: [
     "Ghaziabad",
     "Sahibabad",
+    "Loni",
+    "Vasundhara",
+    "Mohan Nagar",
     "Noida",
     "Greater Noida",
     "Delhi",

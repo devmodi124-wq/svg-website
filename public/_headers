@@ -18,12 +18,13 @@
 /twitter-image
   Content-Type: image/png
 
-# The per-gas social previews (app/products/[slug]/opengraph-image.tsx and
-# twitter-image.tsx) are extensionless for the same reason as the two above.
-/products/*/opengraph-image
+# Every nested social preview (per-gas pages, /sahibabad-industrial-area/, any
+# future page with an opengraph-image.tsx) is extensionless for the same
+# reason. `*` matches across slashes, so one pair of rules covers them all.
+/*/opengraph-image
   Content-Type: image/png
 
-/products/*/twitter-image
+/*/twitter-image
   Content-Type: image/png
 
 # ── Caching ─────────────────────────────────────────────────────────────────

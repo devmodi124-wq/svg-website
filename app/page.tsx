@@ -36,7 +36,13 @@ function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="flex flex-col gap-8">
           <p className="caption">
-            Sahibabad, Ghaziabad · Supplying Delhi NCR
+            <Link
+              href="/sahibabad-industrial-area/"
+              className="transition-colors hover:text-brand-bright"
+            >
+              Sahibabad Industrial Area, Ghaziabad
+            </Link>{" "}
+            · Supplying Delhi NCR
           </p>
 
           {/* Sized to stay readable rather than to fill the viewport — a serif
